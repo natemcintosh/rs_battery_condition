@@ -1,6 +1,7 @@
 use chrono::Local;
 use regex::Regex;
 use rusqlite::Connection;
+use std::env;
 use std::process::Command;
 
 fn get_cond() -> String {
@@ -49,7 +50,10 @@ fn main() {
     let mut stuff = vec![dt.as_str()];
     stuff.append(&mut info);
 
-    let db_name = "/Users/natemcintosh/dev/rs_battery_condition/battery_condition.db";
+    let cli_args = env::args().skip(1).collect::<Vec<_>>();
+    let db_name = cli_args.first().expect("Could not get database path");
+    println!("{:?}", db_name);
+
     let conn = Connection::open(&db_name).expect("Could not connect to database");
     conn.execute("INSERT INTO battery_condition VALUES (?1,?2,?3,?4)", stuff)
         .expect("Could not add row to database");
