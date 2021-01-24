@@ -5,6 +5,8 @@
 ## About
 Monitor your Mac's battery cycle count, condition, and maximum capacity. Put the results in a SQLite database. This tool is meant to be run as a cronjob to track your battery's stats over time. 
 
+Couldn't this just be a pretty basic shell script? Definitely. But I want to get more familiar with Rust. 
+
 ---
 ## Setup
 1. Make sure you have the [Rust programming language installed](https://www.rust-lang.org)
