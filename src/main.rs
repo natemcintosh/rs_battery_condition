@@ -5,7 +5,6 @@ use std::env;
 use std::process::Command;
 
 fn get_cond() -> String {
-    // Run the command, get the results with regex
     let output = Command::new("/usr/sbin/system_profiler")
         .arg("SPPowerDataType")
         .output()
@@ -14,7 +13,7 @@ fn get_cond() -> String {
     String::from_utf8(output.stdout).expect("Could not understand output of command")
 }
 
-fn get_parts_of_interest<'a>(cond: &'a str) -> Vec<&'a str> {
+fn get_parts_of_interest(cond: &str) -> Vec<&str> {
     let cycle_count_re = Regex::new(r"Cycle Count: (\d+)").unwrap();
     let cycle_count = cycle_count_re
         .captures(cond)
@@ -52,7 +51,6 @@ fn main() {
 
     let cli_args = env::args().skip(1).collect::<Vec<_>>();
     let db_name = cli_args.first().expect("Could not get database path");
-    println!("{:?}", db_name);
 
     let conn = Connection::open(&db_name).expect("Could not connect to database");
     conn.execute("INSERT INTO battery_condition VALUES (?1,?2,?3,?4)", stuff)
