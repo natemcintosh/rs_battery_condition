@@ -3,7 +3,7 @@
 
 ---
 ## About
-Monitor your Mac's battery cycle count, condition, and maximum capacity. Put the results in a SQLite database. This tool is meant to be run as a cronjob to track your battery's stats over time. 
+Monitor your Mac's battery cycle count, condition, and maximum capacity. Put the results in a SQLite database. This tool is meant to be run as a cronjob to track your battery's stats over time. NB: as far as I can tell, maximum capacity is only listed in macOS 11+ (Big Sur). If using an earlier version of macOS, you'll have to manually remove the code that searches for maximum capacity and saves it in the database. 
 
 Couldn't this just be a pretty basic shell script? Definitely. But I want to get more familiar with Rust. 
 
