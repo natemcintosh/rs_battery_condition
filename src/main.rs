@@ -15,30 +15,19 @@ fn get_cond() -> String {
 
 fn get_parts_of_interest(cond: &str) -> Vec<&str> {
     let cycle_count_re = Regex::new(r"Cycle Count: (\d+)").unwrap();
-    let cycle_count = cycle_count_re
-        .captures(cond)
-        .unwrap()
-        .get(1)
-        .unwrap()
-        .as_str();
+    let cycle_count = get_re_group(cycle_count_re, cond).unwrap();
 
     let condition_re = Regex::new(r"Condition: (\w+)").unwrap();
-    let condition = condition_re
-        .captures(cond)
-        .unwrap()
-        .get(1)
-        .unwrap()
-        .as_str();
+    let condition = get_re_group(condition_re, cond).unwrap();
 
     let max_capacity_re = Regex::new(r"Maximum Capacity: (\d+)").unwrap();
-    let max_capacity = max_capacity_re
-        .captures(cond)
-        .unwrap()
-        .get(1)
-        .unwrap()
-        .as_str();
+    let max_capacity = get_re_group(max_capacity_re, cond).unwrap();
 
     vec![cycle_count, condition, max_capacity]
+}
+
+fn get_re_group(pattern: Regex, s: &str) -> Option<&str> {
+    Some(pattern.captures(s)?.get(1)?.as_str())
 }
 fn main() {
     let cond = get_cond();
