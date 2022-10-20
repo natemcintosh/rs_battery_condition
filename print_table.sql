@@ -1,3 +1,2 @@
-.mode columns
-.headers on
+.mode box
 SELECT * FROM battery_condition;
